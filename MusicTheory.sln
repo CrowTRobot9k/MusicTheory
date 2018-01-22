@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTheory.Data", "MusicTheory.Data\MusicTheory.Data.csproj", "{8E0EA7BF-6CD1-4E42-BB54-724BE5ACA1B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTheory.UI", "MusicTheory.UI\MusicTheory.UI.csproj", "{AF737C2D-CA62-42C1-AEE1-20CC1686B03E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTheory.UnitTests", "MusicTheory.UnitTests\MusicTheory.UnitTests.csproj", "{2D62BCF5-2F3A-4B39-96F4-1C787E02E24F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E0EA7BF-6CD1-4E42-BB54-724BE5ACA1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0EA7BF-6CD1-4E42-BB54-724BE5ACA1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E0EA7BF-6CD1-4E42-BB54-724BE5ACA1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E0EA7BF-6CD1-4E42-BB54-724BE5ACA1B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF737C2D-CA62-42C1-AEE1-20CC1686B03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF737C2D-CA62-42C1-AEE1-20CC1686B03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF737C2D-CA62-42C1-AEE1-20CC1686B03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF737C2D-CA62-42C1-AEE1-20CC1686B03E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D62BCF5-2F3A-4B39-96F4-1C787E02E24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D62BCF5-2F3A-4B39-96F4-1C787E02E24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D62BCF5-2F3A-4B39-96F4-1C787E02E24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D62BCF5-2F3A-4B39-96F4-1C787E02E24F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

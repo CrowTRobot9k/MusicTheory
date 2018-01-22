@@ -1,0 +1,131 @@
+﻿@using System.Collections.Concurrent
+@model MusicTheory.UI.ViewModels.GuitarVM
+
+@{
+    ViewBag.Title = "Guitar";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-1">
+            @Html.Label("Key")
+            @(Html.Kendo().DropDownListFor(m => m.NoteId)
+                  .DataTextField("NoteName")
+                  .DataValueField("NoteId")
+                  .DataSource(s =>
+                      s.Read(read =>
+                      {
+                          read.Url("/API/MusicService/GetNotes");
+                      })
+                  )
+                  .HtmlAttributes(new {style = "width: 100%"})
+                  )
+        </div>
+        <div class="col-md-1">
+            @Html.Label("Scale")
+            @(Html.Kendo().DropDownListFor(m => m.KeyId)
+                  .DataTextField("MusicKey_")
+                  .DataValueField("MusicKeyId")
+                  .DataSource(s =>
+                      s.Read(read =>
+                      {
+                          read.Url("/API/MusicService/GetKeys");
+                      })
+                  )
+                  .HtmlAttributes(new {style = "width: 100%"})
+                  )
+        </div>
+        <div class="col-md-1">
+            @Html.Label("Chord")
+            @(Html.Kendo().DropDownListFor(m => m.ChordId)
+                  .DataTextField("ChordName")
+                  .DataValueField("ChordId")
+                  .DataSource(s =>
+                      s.Read(read =>
+                      {
+                          read.Url("/API/MusicService/GetChords");
+                      })
+                  )
+                  .HtmlAttributes(new {style = "width: 100%"})
+                  )
+        </div>
+        <div class="col-md-1">
+            @Html.Label("# of Strings")
+            @(Html.Kendo().DropDownListFor(m => m.NumberOfStrings)
+                  .BindTo(new string[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
+                  .HtmlAttributes(new {style = "width: 100%"})
+                  )
+        </div>
+        <div class="col-md-1">
+            @Html.Label("# of Frets")
+            @(Html.Kendo().DropDownListFor(m => m.NumberOfFrets)
+                  .BindTo(new string[] { "12","24" })
+                  .HtmlAttributes(new { style = "width: 100%" })
+            )
+        </div>
+
+    </div>
+
+    <br>
+    @*@Html.HiddenFor(model => model.Guitar)*@
+    <table>
+        <tr>
+            @for (var fretNum = 0; fretNum < @Model.NumberOfFrets; fretNum++)
+            {
+                <td align="center">
+                    @Html.Label(fretNum.ToString())
+                </td>
+            }
+        </tr>
+        @for (var str = 0; str < Model.Guitar.GuitarStrings.Count(); str++)
+        {
+            <tr>
+                @for (var f = 0; f < Model.Guitar.GuitarStrings[str].Frets.Count(); f++)
+                {
+                    <td style="width: 75px; padding: 3px">
+                        @Html.LabelFor(m => @Model.Guitar.GuitarStrings[str].Frets[f].FretNote.NoteName, Model.Guitar.GuitarStrings[str].Frets[f].FretNote.NoteName, new {@class = Model.Guitar.GuitarStrings[str].Frets[f].CssClass, @style = "width:100%", @onclick = "clickNote(this," + str + "," + f + ",'"+ Model.Guitar.GuitarStrings[str].Frets[f].FretNote.NoteName+"')" })
+                    </td>
+                }
+                <td style="width: 75px; padding: 3px">
+                    @Html.HiddenFor(m => m.Tuning[str].NoteName, new {id = str.ToString()})
+                    @(Html.Kendo().DropDownListFor(g => Model.Tuning[str].NoteId)
+                          .DataTextField("NoteName")
+                          .DataValueField("NoteId")
+                          .DataSource(s =>
+                              s.Read(read =>
+                              {
+                                  read.Url("/API/MusicService/GetNotes");
+                              })
+                          )
+                          .HtmlAttributes(new {style = "width: 100%"})
+                          )
+
+                </td>
+            </tr>
+        }
+    </table>
+    @Html.HiddenFor(m => m.CurrentString,new {id="CurrentString"})
+    @Html.HiddenFor(m => m.CurrentFret, new { id = "CurrentFret" })
+    @Html.HiddenFor(m => m.CurrentNote, new { id = "CurrentNote" })
+
+    <input type="submit" class="k-button k-primary" value="View" formaction="/Music/ViewNotes" formmethod="post" />
+}
+
+<script>
+    function clickNote(currentButton, string, fret, note)
+    {
+        $('.btn-success').each(function (i, obj)
+        {
+            $(obj).removeClass('btn-success').addClass('btn-default');
+        });
+
+        $(currentButton).removeClass().addClass('btn btn-success');
+      
+        $('#CurrentString').val(string);
+        $('#CurrentFret').val(fret);
+        $('#CurrentNote').val(note);
+       
+    }
+</script>
+
